@@ -1,0 +1,9 @@
+Security Policy
+
+All employees must:
+
+- Use MFA
+- Change passwords every 90 days
+- Complete annual security training
+
+Data protection is mandatory.

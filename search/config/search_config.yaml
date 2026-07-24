@@ -1,0 +1,15 @@
+search:
+  engine: keyword
+
+  indexing:
+    enabled: true
+    refresh_interval_minutes: 60
+
+  ranking:
+    top_k: 10
+
+  logging:
+    enabled: true
+
+  security:
+    allow_anonymous: false

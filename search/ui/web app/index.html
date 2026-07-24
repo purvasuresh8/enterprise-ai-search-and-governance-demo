@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enterprise Search</title>
+</head>
+<body>
+
+<h1>Enterprise Search Portal</h1>
+
+<input
+    type="text"
+    id="query"
+    placeholder="Search documents..."
+>
+
+<button onclick="search()">
+    Search
+</button>
+
+<div id="results"></div>
+
+<script>
+async function search() {
+
+    const query =
+        document.getElementById("query").value;
+
+    const response =
+        await fetch(
+            `http://localhost:8000/search?query=${query}`
+        );
+
+    const data =
+        await response.json();
+
+    let html = "";
+
+    data.results.forEach(result => {
+
+        html += `
+            <h3>${result.filename}</h3>
+            <p>${result.snippet}</p>
+            <hr>
+        `;
+    });
+
+    document.getElementById("results")
+        .innerHTML = html;
+}
+</script>
+
+</body>
+</html>
