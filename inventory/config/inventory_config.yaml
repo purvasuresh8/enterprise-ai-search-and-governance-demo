@@ -1,0 +1,16 @@
+inventory:
+
+  forecasting:
+    enabled: true
+
+  anomaly_detection:
+    enabled: true
+
+  reporting:
+    enabled: true
+
+  alert_threshold:
+    low_inventory: 20
+
+  database:
+    type: sqlite

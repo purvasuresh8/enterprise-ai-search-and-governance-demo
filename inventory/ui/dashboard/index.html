@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Dashboard</title>
+</head>
+<body>
+
+<h1>Inventory Intelligence Dashboard</h1>
+
+<button onclick="loadForecast()">
+Forecast
+</button>
+
+<button onclick="loadAnomalies()">
+Anomalies
+</button>
+
+<button onclick="loadSummary()">
+Summary
+</button>
+
+<pre id="output"></pre>
+
+<script>
+
+async function loadForecast() {
+
+ const res =
+ await fetch("http://localhost:8000/forecast");
+
+ const data = await res.json();
+
+ document.getElementById("output")
+ .innerText =
+ JSON.stringify(data,null,2);
+}
+
+async function loadAnomalies() {
+
+ const res =
+ await fetch("http://localhost:8000/anomalies");
+
+ const data = await res.json();
+
+ document.getElementById("output")
+ .innerText =
+ JSON.stringify(data,null,2);
+}
+
+async function loadSummary() {
+
+ const res =
+ await fetch("http://localhost:8000/summary");
+
+ const data = await res.json();
+
+ document.getElementById("output")
+ .innerText =
+ JSON.stringify(data,null,2);
+}
+
+</script>
+
+</body>
+</html>
