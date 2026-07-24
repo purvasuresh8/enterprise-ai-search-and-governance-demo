@@ -1,0 +1,14 @@
+[
+  {
+    "keyword": "password",
+    "solution": "Reset password through the self-service portal."
+  },
+  {
+    "keyword": "vpn",
+    "solution": "Reconnect VPN and restart VPN client."
+  },
+  {
+    "keyword": "laptop",
+    "solution": "Submit hardware replacement request."
+  }
+]
