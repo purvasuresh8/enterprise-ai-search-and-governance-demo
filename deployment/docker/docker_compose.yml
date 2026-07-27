@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+
+  search:
+
+    build:
+      context: .
+      dockerfile: deployment/docker/Dockerfile.search
+
+    ports:
+      - "8000:8000"
+
+  inventory:
+
+    build:
+      context: .
+      dockerfile: deployment/docker/Dockerfile.inventory
+
+    ports:
+      - "8001:8001"
+
+  agents:
+
+    build:
+      context: .
+      dockerfile: deployment/docker/Dockerfile.agents
+
+    ports:
+      - "8002:8002"
+
+  governance:
+
+    build:
+      context: .
+      dockerfile: deployment/docker/Dockerfile.governance
+
+    ports:
+      - "8003:8003"

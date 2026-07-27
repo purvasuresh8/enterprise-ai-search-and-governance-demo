@@ -1,0 +1,71 @@
+name: Enterprise AI CI/CD
+
+on:
+
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+
+      with:
+        python-version: "3.11"
+
+    - name: Install Dependencies
+      run: |
+        pip install pytest
+        pip install fastapi uvicorn pandas numpy pyyaml
+
+    - name: Run Tests
+      run: |
+        pytest
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    needs: test
+
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - name: Build Search Image
+      run: |
+        docker build \
+          -f deployment/docker/Dockerfile.search \
+          -t enterprise/search:latest .
+
+    - name: Build Inventory Image
+      run: |
+        docker build \
+          -f deployment/docker/Dockerfile.inventory \
+          -t enterprise/inventory:latest .
+
+    - name: Build Agents Image
+      run: |
+        docker build \
+          -f deployment/docker/Dockerfile.agents \
+          -t enterprise/agents:latest .
+
+    - name: Build Governance Image
+      run: |
+        docker build \
+          -f deployment/docker/Dockerfile.governance \
+          -t enterprise/governance:latest .
