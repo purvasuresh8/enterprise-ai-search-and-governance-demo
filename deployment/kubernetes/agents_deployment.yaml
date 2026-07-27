@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: agents-service
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: agents
+
+  template:
+    metadata:
+      labels:
+        app: agents
+
+    spec:
+      containers:
+      - name: agents
+
+        image: enterprise/agents:latest
+
+        ports:
+        - containerPort: 8002
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: agents-service
+
+spec:
+  selector:
+    app: agents
+
+  ports:
+  - port: 80
+    targetPort: 8002
+
+  type: ClusterIP
