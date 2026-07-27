@@ -1,0 +1,18 @@
+ai_policy:
+
+  blocked_keywords:
+    - password
+    - ssn
+    - credit card
+
+  allowed_domains:
+    - hr
+    - finance
+    - it
+    - search
+
+  audit_logging: true
+
+  pii_detection: true
+
+  max_prompt_length: 1000
