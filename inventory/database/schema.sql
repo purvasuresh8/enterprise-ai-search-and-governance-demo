@@ -1,5 +1,5 @@
 CREATE TABLE inventory (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     product_name TEXT NOT NULL,
     quantity INTEGER NOT NULL,
     reorder_threshold INTEGER NOT NULL
