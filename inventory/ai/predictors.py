@@ -37,3 +37,4 @@ class DemandPredictor:
             "historical_average": round(mean(data), 2),
             "predicted_demand": prediction
         }
+        

@@ -1,36 +1,57 @@
 from fastapi import FastAPI
-from inventory.ai.predictors import DemandPredictor
-from inventory.ai.anomaly_detector import AnomalyDetector
-from inventory.ai.summarizer import InventorySummarizer
+from pydantic import BaseModel
+
+from inventory.ai.support_agent import SupportAgent
+from inventory.ai.evaluation_agent import EvaluationAgent
 
 app = FastAPI(
-    title="Inventory Intelligence API",
+    title="Generative AI Customer Support Platform",
     version="1.0.0"
 )
 
-predictor = DemandPredictor()
-detector = AnomalyDetector()
-summarizer = InventorySummarizer()
+support_agent = SupportAgent()
+evaluation_agent = EvaluationAgent()
+
+
+class ChatRequest(BaseModel):
+    message: str
 
 
 @app.get("/")
 def health():
     return {
         "status": "healthy",
-        "service": "inventory-intelligence"
+        "service": "genai-customer-support"
     }
 
 
-@app.get("/forecast")
-def forecast():
-    return predictor.predict()
+@app.post("/chat")
+def chat(request: ChatRequest):
+
+    answer = support_agent.generate_response(
+        request.message
+    )
+
+    return {
+        "question": request.message,
+        "answer": answer
+    }
 
 
-@app.get("/anomalies")
-def anomalies():
-    return detector.detect()
+@app.post("/evaluate")
+def evaluate(request: ChatRequest):
 
+    answer = support_agent.generate_response(
+        request.message
+    )
 
-@app.get("/summary")
-def summary():
-    return summarizer.generate_summary()
+    scores = evaluation_agent.evaluate(
+        request.message,
+        answer
+    )
+
+    return {
+        "answer": answer,
+        "evaluation": scores
+    }
+    
